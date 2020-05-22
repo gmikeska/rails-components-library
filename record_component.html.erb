@@ -1,0 +1,17 @@
+<% if(@fields.nil?)
+  @fields = @record.class.columns.collect{|c| c.name.to_sym}
+end %>
+<tr data-id=<%= @record[:id] %>>
+  <% @fields.each do |fieldName| %>
+    <td><%= @record[fieldName] %></td>
+  <% end %>
+  <% if(@show) %>
+    <td><%= view_button(@record) %></td>
+  <% end %>
+  <% if(@edit) %>
+    <td><%= edit_button(edit_polymorphic_path(@record), class: 'btn btn-sm btn-secondary') %></td>
+  <% end %>
+  <% if(@delete) %>
+    <td><%= delete_button(@record) %></td>
+  <% end %>
+</tr>
